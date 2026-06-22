@@ -1,0 +1,5 @@
+<h2>Something Went Wrong</h2>
+
+<a href="index.jsp">
+  Go Back
+</a>
