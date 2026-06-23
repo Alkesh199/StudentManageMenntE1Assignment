@@ -138,4 +138,56 @@ public class StudentDAO {
 
         return false;
     }
+
+    public static boolean emailExists(String email) {
+
+        String sql = "SELECT COUNT(*) FROM students WHERE email = ?";
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean emailExistsForOtherStudent(
+            String email,
+            int id) {
+
+        String sql =
+                "SELECT COUNT(*) FROM students WHERE email=? AND id<>?";
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, email);
+            ps.setInt(2, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

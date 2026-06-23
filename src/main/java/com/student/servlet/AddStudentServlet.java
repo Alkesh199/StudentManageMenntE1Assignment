@@ -21,6 +21,29 @@ public class AddStudentServlet extends HttpServlet {
         String email = request.getParameter("email");
         String course = request.getParameter("course");
 
+        if(name == null || name.trim().isEmpty()) {
+            response.getWriter().println("Name cannot be empty");
+            return;
+        }
+
+        if(course == null || course.trim().isEmpty()) {
+            response.getWriter().println("Course cannot be empty");
+            return;
+        }
+
+        String emailRegex =
+                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+        if(!email.matches(emailRegex)) {
+            response.getWriter().println("Invalid email format");
+            return;
+        }
+
+        if(StudentDAO.emailExists(email)) {
+            response.getWriter().println("Email already exists");
+            return;
+        }
+
         Student student = new Student();
 
         student.setName(name);

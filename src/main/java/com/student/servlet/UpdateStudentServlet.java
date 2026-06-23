@@ -5,7 +5,9 @@ import com.student.model.Student;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -17,22 +19,53 @@ public class UpdateStudentServlet extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
 
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String course = request.getParameter("course");
+
+        // Name Validation
+        if (name == null || name.trim().isEmpty()) {
+            response.getWriter().println("Name cannot be empty");
+            return;
+        }
+
+        // Course Validation
+        if (course == null || course.trim().isEmpty()) {
+            response.getWriter().println("Course cannot be empty");
+            return;
+        }
+
+        // Email Validation
+        String emailRegex =
+                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+        if (!email.matches(emailRegex)) {
+            response.getWriter().println("Invalid Email Format");
+            return;
+        }
+
+        // Duplicate Email Validation
+        if (StudentDAO.emailExistsForOtherStudent(email, id)) {
+            response.getWriter()
+                    .println("Email already exists for another student");
+            return;
+        }
+
         Student student = new Student();
 
-        student.setId(
-                Integer.parseInt(request.getParameter("id")));
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setCourse(course);
 
-        student.setName(
-                request.getParameter("name"));
+        boolean updated = StudentDAO.updateStudent(student);
 
-        student.setEmail(
-                request.getParameter("email"));
-
-        student.setCourse(
-                request.getParameter("course"));
-
-        StudentDAO.updateStudent(student);
-
-        response.sendRedirect("viewStudents");
+        if (updated) {
+            response.sendRedirect("viewStudents");
+        } else {
+            response.getWriter().println("Failed to update student");
+        }
     }
 }
