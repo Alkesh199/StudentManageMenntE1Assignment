@@ -8,34 +8,8 @@
 <head>
     <title>Edit Student</title>
 
-    <style>
-
-        body{
-            font-family: Arial;
-            background:#f4f4f4;
-        }
-
-        .container{
-            width:400px;
-            margin:50px auto;
-            background:white;
-            padding:20px;
-            border-radius:10px;
-        }
-
-        input{
-            width:100%;
-            padding:10px;
-            margin-top:10px;
-        }
-
-        button{
-            width:100%;
-            padding:10px;
-            margin-top:15px;
-        }
-
-    </style>
+    <link rel="stylesheet"
+          href="css/style.css">
 
 </head>
 
@@ -43,36 +17,40 @@
 
 <div class="container">
 
-    <h2>Edit Student</h2>
+    <div class="card">
 
-    <form action="updateStudent" method="post">
+        <h2>Edit Student</h2>
 
-        <input type="hidden"
-               name="id"
-               value="<%= s.getId() %>">
+        <form action="updateStudent"
+              method="post">
 
-        <input type="text"
-               name="name"
-               value="<%= s.getName() %>"
-               required>
+            <input type="hidden"
+                   name="id"
+                   value="<%= s.getId() %>">
 
-        <input type="email"
-               name="email"
-               value="<%= s.getEmail() %>"
-               required>
+            <input type="text"
+                   name="name"
+                   value="<%= s.getName() %>"
+                   required>
 
-        <input type="text"
-               name="course"
-               value="<%= s.getCourse() %>"
-               required>
+            <input type="email"
+                   name="email"
+                   value="<%= s.getEmail() %>"
+                   required>
 
-        <button type="submit">
-            Update Student
-        </button>
+            <input type="text"
+                   name="course"
+                   value="<%= s.getCourse() %>"
+                   required>
 
-    </form>
+            <button type="submit">
+                Update Student
+            </button>
+
+        </form>
+
+    </div>
 
 </div>
-
 </body>
 </html>

@@ -4,13 +4,20 @@
 
 <html>
 <head>
+    <link rel="stylesheet"
+          href="css/style.css">
     <title>Students</title>
 </head>
 <body>
+<div class="container">
+    <h1>Student List</h1>
 
-<h1>Student List</h1>
+    <a href="index.jsp"
+       class="add-btn">
+        Add Student
+    </a>
 
-<table border="1">
+<table>
 
     <tr>
         <th>ID</th>
@@ -33,16 +40,20 @@
         <td><%= s.getEmail() %></td>
         <td><%= s.getCourse() %></td>
         <td>
-            <a href="editStudent?id=<%= s.getId() %>">
+
+            <a class="edit-btn"
+               href="editStudent?id=<%= s.getId() %>">
                 Edit
             </a>
 
-            &nbsp; | &nbsp;
+            |
 
-            <a href="deleteStudent?id=<%= s.getId() %>"
+            <a class="delete-btn"
+               href="deleteStudent?id=<%= s.getId() %>"
                onclick="return confirm('Delete this student?')">
                 Delete
             </a>
+
         </td>
 
     </tr>
@@ -52,6 +63,7 @@
     %>
 
 </table>
+</div>
 
 </body>
 </html>

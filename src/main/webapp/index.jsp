@@ -1,37 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Management</title>
 
-    <style>
-        body{
-            font-family: Arial;
-            background:#f4f4f4;
-        }
+    <title>Student Management System</title>
 
-        .container{
-            width:400px;
-            margin:50px auto;
-            background:white;
-            padding:20px;
-            border-radius:10px;
-        }
-
-        input{
-            width:100%;
-            padding:10px;
-            margin-top:10px;
-        }
-
-        button{
-            margin-top:15px;
-            width:100%;
-            padding:10px;
-            background:#2196f3;
-            color:white;
-            border:none;
-        }
-    </style>
+    <link rel="stylesheet"
+          href="css/style.css">
 
 </head>
 
@@ -39,38 +13,44 @@
 
 <div class="container">
 
-    <h2>Add Student</h2>
+    <div class="card">
 
-    <form action="addStudent" method="post">
+        <h1>Add Student</h1>
 
-        <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                required>
+        <form action="addStudent"
+              method="post">
 
-        <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required>
+            <input type="text"
+                   name="name"
+                   placeholder="Enter Name"
+                   required>
 
-        <input
-                type="text"
-                name="course"
-                placeholder="Course"
-                required>
+            <input type="email"
+                   name="email"
+                   placeholder="Enter Email"
+                   required>
 
-        <button type="submit">
-            Save Student
-        </button>
+            <input type="text"
+                   name="course"
+                   placeholder="Enter Course"
+                   required>
 
-    </form>
-    <br><br>
+            <button type="submit">
+                Save Student
+            </button>
 
-    <a href="viewStudents">
-        View Students
-    </a>
+        </form>
+
+        <br>
+
+        <center>
+            <a href="viewStudents"
+               class="add-btn">
+                View Students
+            </a>
+        </center>
+
+    </div>
 
 </div>
 
